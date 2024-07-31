@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Entry</title>
     <link rel="stylesheet" href="../assets/css/blogs.css">
+    <style>
+        .math-content {
+            visibility: hidden;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="blog-container">
@@ -18,11 +25,26 @@
         </section>
         <section class="blog-content">
             <h2>Main Content</h2>
-            <p>Content goes here...</p>
+            <p id="qft-equation" class="math-content">
+                \[ \text{QFT} \ket{x} = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i x k / N} \ket{k} \]
+            </p>
         </section>
         <footer class="blog-footer">
             <p>&copy; footer</p>
         </footer>
     </div>
+    <script>
+        MathJax = {
+            startup: {
+                pageReady: () => {
+                    return MathJax.startup.defaultPageReady().then(() => {
+                        document.querySelectorAll('.math-content').forEach(el => {
+                            el.style.visibility = 'visible';
+                        });
+                    });
+                }
+            }
+        };
+    </script>
 </body>
 </html>
